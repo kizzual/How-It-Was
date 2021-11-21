@@ -220,7 +220,7 @@ public class UI_buttons : MonoBehaviour
         }
         yield return new WaitForSeconds(1.5f);
 
-        if (PlayerPrefs.HasKey("no_ads"))
+/*        if (PlayerPrefs.HasKey("no_ads"))
         {
             Debug.Log("have");
         }
@@ -228,7 +228,7 @@ public class UI_buttons : MonoBehaviour
         {
             _adMob.ShowAd();
             Debug.Log("!");
-        }
+        }*/
         yield return new WaitForSeconds(1f);
 
         okButton.SetActive(true);
