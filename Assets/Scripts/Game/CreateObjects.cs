@@ -322,18 +322,30 @@ public class CreateObjects : MonoBehaviour
                     
                     float angle = Quaternion.Angle(_inventory.Cell[i].transform.rotation, currentPoints[x].transform.rotation);
                     float percent = ((180 - angle) / 180) * 100;
-                    fullRotationPercent += percent;
+                    if (currentPoints[x].GetComponentInChildren<Cell>().ID == currentPoints[x].GetComponent<PointCheck>().ID)
+                    {
+                        fullRotationPercent += percent;
+                        cellChecked++;
+
+                    }
+                    else
+                    {
+
+                      fullRotationPercent += percent / 2;
+                    }
+
+
                 }
             }
         }
 
-        for (int i = 0; i < currentPoints.Count; i++)
+    /*    for (int i = 0; i < currentPoints.Count; i++)
         {
             if (currentPoints[i].GetComponent<PointCheck>().ID == currentPoints[i].GetComponentInChildren<Cell>().ID)
             {
                 cellChecked++;
             }
-        }
+        }*/
   
         float tmp = (fullRotationPercent + (100 * cellChecked)) / (objectCount * 2);
         FinishPercent(tmp);
