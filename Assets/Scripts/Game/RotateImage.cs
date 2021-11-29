@@ -6,46 +6,29 @@ using UnityEngine.EventSystems;
 
 public class RotateImage : MonoBehaviour
 {
-    [SerializeField] private Vector3 axis;// = Vector3.down;
-    public float speeds;
-    public GameObject RotateImg;
-    void Start()
-    {
+    [SerializeField]
+    private Transform _parentTransform;
 
+    private Transform _myTransfrom;
+    private Vector3 _myForward;
+
+    private void Awake()
+    {
+        _myTransfrom = transform;
+        if (_parentTransform == null) _parentTransform = _myTransfrom.parent;
+        var forward = _parentTransform.forward;
+        _myForward = _myTransfrom.position.x > _parentTransform.position.x ? forward : -forward;
     }
 
-    void Update()
+    private void OnMouseDrag()
     {
+        Debug.Log("1");
+        var position = _parentTransform.position;
+        var mousePos = Input.mousePosition;
+        mousePos.z = position.z;
+        mousePos = Camera.main.ScreenToWorldPoint(mousePos);
 
-    }
-    private void OnMouseDown()
-    {
-    //    axis = new Vector3(transform.rotation.x, transform.rotation.y, transform.rotation.z);
-    }
-    void OnMouseDrag()
-    {
-
-        /*      Vector3 position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-              // Угол между объектами
-              float angle = Vector2.Angle(Vector2.up, position - transform.position);
-
-              // Мгновенное вращение
-              // transform.eulerAngles = new Vector3(0f, 0f, transform.position.x < position.x ? -angle : angle);
-              // Вращение с задержкой
-              transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(0, 0, transform.position.x < position.x ? -angle : angle), speeds * Time.deltaTime);
-      */
-
-
-
-
-
-        axis = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        Vector3 difference = axis;
-        difference.Normalize();
-        float rotation_z = Mathf.Atan2(difference.y, difference.x) * Mathf.Rad2Deg;
-        RotateImg.transform.rotation = Quaternion.Euler(0f, 0f, rotation_z);
-
-
+        _parentTransform.rotation = Quaternion.LookRotation(_parentTransform.forward, Vector3.Cross(_myForward, mousePos - position));
     }
 }
 

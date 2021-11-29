@@ -547,8 +547,11 @@ public class CreateObjects : MonoBehaviour
     {
         int x = Random.Range(2, _generateMatrix.widthMatrix - 2);
         int y = Random.Range(3, _generateMatrix.heithhMatrix - 1);
-    //    Debug.Log(x);
-    //    Debug.Log(y);
+        Debug.Log(_generateMatrix.heithhMatrix +  "    h");
+        Debug.Log(_generateMatrix.widthMatrix +  "    w");
+        Debug.Log(x);
+        Debug.Log(y);
+        Debug.Log("-----------");
         spawnPos =  _generateMatrix.SearchGo(x, y);
         
     }

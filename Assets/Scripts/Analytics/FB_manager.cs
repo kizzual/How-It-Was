@@ -52,7 +52,7 @@ public class FB_manager : MonoBehaviour
     }
     public void FacebookShare()
     {
-        FB.ShareLink(new System.Uri("https://www.youtube.com/"), "Check It ",
+        FB.ShareLink(new System.Uri("https://play.google.com/store/apps/details?id=com.IndiSpace.HowItwas"), "Рекомендую How it was ? ",
             "");
         //    new System.Uri("http://test.png"));
     }
